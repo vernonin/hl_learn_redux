@@ -48,4 +48,20 @@
 			connect(mapStateToProps, mapDispatchToProps)(UI组件)
 				-mapStateToProps：映射状态，返回值是一个对象
 				-mapDispatchToProps：映射操作状态的方法，返回值是一个对象
-	3. 备注：容器组件中的store是靠props传进去的，而不是在容器组件中直接引入
+	3. 备注1：容器组件中的store是靠props传进去的，而不是在容器组件中直接引入
+	4. 备注2：mapDispatchToProps也可以是一个对象 ---> react-redux 会自己dispatch
+
+
+## 5.求和案例 react-redux 优化
+	1. 容器组件和UI组件整合成一个文件
+	2. 无需自己给容器组件传递store，给<App/>包裹<Provider store={store}>即可
+	3. 使用react-redux后不用再自己检测redux中状态的改变了，容器组件可以自动完成这个工作
+	4. mapDispatchToProps也可以简写成一个对象
+	5. 一个组件要和redux“打交道”要经过那几步？
+		1). 定义好UI组件 --- 不暴露
+		2). 引入connect生成一个容器组件，并暴露，如下：
+									connect(
+										state => (key: value), // 映射状态
+										{key: value}  // 映射方法
+									)(UI组件)
+		3). 在UI组件中通过this.props.xxx读取和操作状态
