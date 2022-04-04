@@ -1,35 +1,38 @@
 import React, { Component } from 'react'
-// 引入store，用于获取store中保存的状态
-import store from '../../redux/store'
 
 export default class Count extends Component {
 
+	state = {count: 0}
+
 	increment = () => {
 		const { value } = this.selectNumber
-		store.dispatch({type: 'increment', data: parseInt(value)})
+		const { count } = this.state
+		this.setState({ count: count + parseInt(value) })
 	}
 	decrement = () => {
 		const { value } = this.selectNumber
-		store.dispatch({type: 'decrement', data: parseInt(value)})
+		const { count } = this.state
+		this.setState({ count: count - parseInt(value) })
 	}
 	incrementIfOdd = () => {
 		const { value } = this.selectNumber
-		const count = store.getState()
+		const { count } = this.state
 		if(count % 2 !== 0) {
-			store.dispatch({type: 'increment', data: parseInt(value)})
+			this.setState({ count: count + parseInt(value) })
 		}
 	}
 	incrementAsync = () => {
 		const { value } = this.selectNumber
+		const { count } = this.state
 		setTimeout(() => {
-			store.dispatch({type: 'increment', data: parseInt(value)})
+			this.setState({ count: count + parseInt(value) })
 		}, 500)
 	}
 
 	render() {
 		return (
 			<div>
-				<h1>当前求和为：{store.getState()}</h1>
+				<h1>当前求和为：{this.state.count}</h1>
 				<select ref={c => this.selectNumber = c}>
 					<option value="1">1</option>
 					<option value="2">2</option>
