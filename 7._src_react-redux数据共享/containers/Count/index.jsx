@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // 引入createAction
 import {
-	increment,
-	decrement,
-	incrementAsync
+	createIncrementAction,
+	createDecrementAction,
+	createIncrementAsyncAction
 } from '../../redux/actions/count'
 
 // 定义UI组件
@@ -14,27 +14,27 @@ class Count extends Component {
 
 	increment = () => {
 		const { value } = this.selectNumber
-		this.props.increment(parseInt(value))
+		this.props.jia(parseInt(value))
 	}
 	decrement = () => {
 		const { value } = this.selectNumber
-		this.props.decrement(parseInt(value))
+		this.props.jian(parseInt(value))
 	}
 	incrementIfOdd = () => {
 		const { value } = this.selectNumber
 		if(this.props.count % 2 !== 0) {
-			this.props.increment(parseInt(value))
+			this.props.jia(parseInt(value))
 		}
 	}
 	incrementAsync = () => {
 		const { value } = this.selectNumber
-		this.props.incrementAsync(parseInt(value), 1000)
+		this.props.jiaAsync(parseInt(value), 1000)
 	}
 
 	render() {
 		return (
 			<div>
-				<h1>当前求和为：{this.props.count}，总人数为：{this.props.personCount}</h1>
+				<h1>当前求和为：{this.props.count}，总人数为：{this.props.renshu}</h1>
 				<select ref={c => this.selectNumber = c}>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -51,7 +51,7 @@ class Count extends Component {
 
 // 使用connect()()创建并暴露一个Count的容器组件
 export default connect(
-	state => ({count: state.count, personCount: state.persons.length}),
+	state => ({count: state.count, renshu: state.person.length}),
 
 	// mapDispatchToProps的一般写法
 	// dispatch => ({
@@ -62,8 +62,8 @@ export default connect(
 
 	// mapDispatchToProps的简写 ---> react-redux会自己调用dispatch函数
 	{
-		increment,
-		decrement,
-		incrementAsync,
+		jia: createIncrementAction,
+		jian: createDecrementAction,
+		jiaAsync: createIncrementAsyncAction,
 	}
 )(Count)

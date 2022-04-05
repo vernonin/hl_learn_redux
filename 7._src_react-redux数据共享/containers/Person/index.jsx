@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { nanoid } from 'nanoid'
 import { connect } from 'react-redux'
 
-import { addPerson } from '../../redux/actions/person'
-import { increment } from '../../redux/actions/count'
+import { createAddPersonAction } from '../../redux/actions/person'
+import { createIncrementAction } from '../../redux/actions/count'
 
 class Person extends Component {
 
@@ -34,7 +34,7 @@ class Person extends Component {
 				<button onClick={this.addPerson}>添加</button>
 				<ul>
 					{
-						this.props.persons.map(p => {
+						this.props.person.map(p => {
 							return <li key={p.id}>{p.name} --- {p.age}</li>
 						})
 					}
@@ -45,9 +45,9 @@ class Person extends Component {
 }
 
 export default connect(
-	state => ({persons: state.persons, count: state.count}), // 映射状态
+	state => ({person: state.person, count: state.count}), // 映射状态
 	{
-		addPerson,
-		addCount: increment
+		addPerson: createAddPersonAction,
+		addCount: createIncrementAction
 	} // 映射操作状态的方法
 )(Person)

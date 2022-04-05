@@ -1,19 +1,19 @@
 ## 1.求和案例 redux 精简版
 	新增文件
- 1. 去除Count组件自身的状态
+	1. 去除Count组件自身的状态
 
- 2. .src下建立：
+ 	2. .src下建立：
 		-src
 			-redux
 				-store.js
 				-count_reducer.js
 
-	3. store.js:
+ 	3. store.js:
 		1). 引入redux中的createStore函数，创建一个store
 		2). createStore调用时要传入一个为其服务的reducer
 		3). 记得暴露store对象
 
-	4. count_reducer.js
+ 	4. count_reducer.js
 		1). reducer的本质是一个函数，接收：preState, action,返回加工后的状态
 		2). reducer有两个作用：初始化状态，加工状态
 		3). reducer被第一次调用时，是store自动触发的，
@@ -72,3 +72,8 @@
 	2. 为Person组件编写：reducer、action,配置constant常量
 	3. 重点：Person的reducer和Count的reducer要使用combineReducer进行合并，合并后是一个状态对象
 	4. 交给store的是总的reducer，最后注意在组件中取出状态的时候，记得“取到位”
+
+	
+## 6.求和案例 react-redux 最终版
+	1. 所有变量的名字要规范，尽量触发对象简写方式
+	2. reducer文件夹中，编写index.js专门用于汇总并暴露所有reducer
