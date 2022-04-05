@@ -65,3 +65,10 @@
 										{key: value}  // 映射方法
 									)(UI组件)
 		3). 在UI组件中通过this.props.xxx读取和操作状态
+
+
+## 6.求和案例 react-redux 数据共享
+	1. 定义一个Person组件，和Count组件通过redux共享数据
+	2. 为Person组件编写：reducer、action,配置constant常量
+	3. 重点：Person的reducer和Count的reducer要使用combineReducer进行合并，合并后是一个状态对象
+	4. 交给store的是总的reducer，最后注意在组件中取出状态的时候，记得“取到位”
